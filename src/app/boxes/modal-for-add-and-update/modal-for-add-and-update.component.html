@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
+    <div mat-dialog-content>
+        <form [formGroup]="profileInfo" (ngSubmit)="onSubmit()" action="">
+            <p>{{profileInfo.value | json}}</p>
+            <br>
+            <label for="title"  class="form-label">Title: </label>
+            <input id="title" class="form-control"  type="text" formControlName="title" >
+            <div *ngIf="profileInfo.controls['title'].invalid && (profileInfo.controls['title'].dirty || profileInfo.controls['title'].touched)" >
+                <div *ngIf="profileInfo.controls['title'].errors.required">
+                    <p class="lead text-danger mb-0" style="font-size: 0.9em">Please enter title</p>
+                </div>
+                <!-- <p>{{profileInfo.controls['title'].errors.ValidateTitle}}</p> -->
+                <div  *ngIf="(
+                    profileInfo.controls['title'].dirty ||
+                    profileInfo.controls['title'].touched
+                   ) &&
+                   profileInfo.controls['title'].invalid">
+                    <p class="lead text-danger mb-0" style="font-size: 0.9em">title connt have space</p>
+                </div>
+            </div>
+
+            <br>
+            <label for="description"  class="form-label">Description: </label>
+            <input id="description" class="form-control"  type="text" formControlName="description" >
+            <div *ngIf="profileInfo.controls['description'].invalid && (profileInfo.controls['description'].dirty || profileInfo.controls['description'].touched)" >
+                <div *ngIf="profileInfo.controls['description'].errors.required">
+                    <p class="lead text-danger mb-0" style="font-size: 0.9em">Please enter description</p>
+                </div>
+            </div>
+            
+           <br>
+           
+           <mat-form-field appearance="fill" class="mt-4">
+            <mat-label>Choice Author</mat-label>
+            <!-- <p>{{profileInfo.get('authorID').value}}</p> -->
+            <mat-select formControlName="authorID">
+
+              <mat-option *ngFor="let author of authors"  [value]="author.id">
+                {{author.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+            <div style="width:50%">
+               
+                <mat-form-field appearance="fill">
+                    <mat-label>Toppings</mat-label>
+                    
+                    <mat-select formControlName="genresIDS"   multiple>
+                      <mat-option *ngFor="let topping of dropdownList" [value]="topping.id">{{topping.name | json}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                
+            </div>
+            <br>
+            <!-- <input type="file" formControlName="picture"> -->
+            <!-- [disabled]="!profileInfo.valid" -->
+            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+            <br>
+            <input 
+            formControlName="file"
+            id="file" 
+            type="file" 
+            class="form-control"
+            (change)="onFileChange($event)">
+            <br>
+            <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+       
+    </div>

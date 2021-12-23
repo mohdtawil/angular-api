@@ -1,0 +1,75 @@
+
+
+   <div class="container">
+       <div class="row">
+           <div class="col-12 mt-4">
+                <ul class="nav nav-pills">
+                    <li class="nav-item" ><a routerLink="/boxes/page/1/limit/5" routerLinkActive="active"  class="nav-link">Boxes</a></li>
+                    <li class="nav-item" ><a routerLink="/authors" routerLinkActive="active" class="nav-link">Author</a></li>
+                </ul>
+           </div>
+           <div class="col-12 mt-5">
+            
+                
+                
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngFor="let author of authors; let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{author.name}}</td>
+                                <td>{{author.email}}</td>
+                                <td>{{author.id}}</td>
+
+                                
+                                <td class="d-flex">
+                                    
+                                        <button class="btn btn-danger btn-sm" (click)="removeAuthor(author.authorid)">Remove</button>
+                                   
+
+                                    <a class="btn btn-warning text-white btn-sm mx-3" href="/edit/author/">Edit</a>
+
+                                </td>
+                            </tr>
+                             
+                        </tbody>
+                      </table>
+                     
+                      
+                      <div class="row mt-5">
+                        
+                            <div class="mb-3 col">
+                              <label for="" class="form-label">Name</label>
+                              <input type="text" id="name" name="name" [(ngModel)]="name" required class="form-control">
+                            </div>
+                            
+                            
+                            <div class="mb-3 col">
+                                <label for="" class="form-label">Email</label>
+                                <input type="text" id="email" name="email" [(ngModel)]="email" required class="form-control">
+                            </div>
+                            <button (click)="addNewAuthor(name,  email)" class="btn btn-success">Add Author</button>
+                         
+                      </div>
+                    
+                    
+                    
+                    
+                    
+                
+            
+           </div>
+       </div>
+   </div>
+
+
+ 

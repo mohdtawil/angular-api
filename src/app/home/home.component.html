@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 p-1">
+            <h1>Books</h1>
+        </div>
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Filter Author</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="selectedBook" (change)="valueSelected()">
+                    <option>all</option>
+                    <option *ngFor="let author of authors">{{ author.name }}</option>
+                  </select> 
+            </div>
+            
+        </div>
+        
+       
+        
+         
+        <div class="col-12 p-1">
+            <form  [formGroup]="homeQueries">
+                <div style="width:50%">
+               
+                    <mat-form-field appearance="fill">
+                        <mat-label>Genres</mat-label>
+                        
+                        <mat-select formControlName="genresIDS"   multiple>
+                          <mat-option *ngFor="let genre of genres" (click)="filterGenres()" [value]="genre.id">{{genre.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      
+                    
+                </div>
+                <div class="form-group">
+                    <input type="search" placeholder="Search.." (keyup)="searchThroughQuery()" formControlName="searchQuery"  class="form-control" id="">
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div *ngIf="books.length == 0">
+                    <p class="lead mt-3">Not have any result related your query</p>
+                </div>
+                <!-- <p>{{books | json}}</p> -->
+                <div *ngFor="let book of books"  class="col-lg-3 col-md-4 col-sm-6 col-6 p-2 ">
+                    <a class="text-decoration-none text-dark" [routerLink]="['/boxes', book.id]">
+                
+                    <div class="border shadow" style="border-radius: 10px;">
+                        <img class="w-100" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" src="http://localhost:3000/{{book.picture}}" alt="">
+                        <h1 class="m-2 h3">{{book.title}}</h1>
+                        <p class="lead m-2 mb-5" style="font-size: 0.98em;">{{book.description}}</p>
+                        <p class="lead m-2 mb-0" style="font-size: 0.9em; font-style: italic;">by {{book.author.name}}</p>
+                        <p class="lead m-2" style="font-size: 0.9em; font-style: italic;">
+                            type: 
+                            <span  *ngFor="let genre of book.genres">{{genre.name}}</span>
+                        </p>
+                    </div>
+                </a>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+  

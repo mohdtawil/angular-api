@@ -1,0 +1,94 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <title></title>
+  </head>
+  <body>
+   <div class="container">
+       <div class="row">
+           <div class="col-12 mt-4">
+                <ul class="nav nav-pills">
+                    <li class="nav-item" ><a routerLink="/boxes" routerLinkActive="active"  class="nav-link">Boxes</a></li>
+                    <li class="nav-item" ><a routerLink="/authors" routerLinkActive="active" class="nav-link">Author</a></li>
+                </ul>
+                
+           </div>
+          
+           <div class="col-12 mt-5">
+            <div >
+
+                <div>
+                    <table class="table ">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">picture</th>
+                            <!-- <th scope="col">Author</th>
+                            <th scope="col">Genres</th>
+                            <th scope="col">Genres IDs</th> -->
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody >
+                            
+                            <tr *ngFor="let box of boxes | paginate: { itemsPerPage: length, currentPage: 1 } let i = index" >
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{box.title}}</td>
+                                <td>{{box.id}}</td>
+                                <td> <img src="http://localhost:3000/{{box.picture}}" style="width: 50px; height: 50px;" alt=""></td>
+                                <!-- <td>{{box.author.name}}</td> -->
+                                <!-- <td>
+                                  <span class="d-block" *ngFor="let genre of box.genres">{{genre.name}}</span>
+                                </td>
+                                <td>
+                                  <span class="d-block" *ngFor="let genre of box.genres">{{genre.id}}</span>
+                                </td> -->
+                                <td>{{box.description}}</td>
+                                <td>
+                                   <div class="d-flex">
+                                    <button class="btn btn-danger btn-sm" (click)="remove(box.id)">Remove</button>
+                                    <a class="btn btn-warning text-white btn-sm mx-3" (click)="openEditDialog(box.title, box.id, box.description, box.authorId , box.genres)">Edit</a>
+                                   </div>        
+                                </td>
+                            </tr>
+                             
+                        </tbody>
+                       
+                      </table> 
+                      <mat-paginator [length]="length"
+                      [pageSize]="pageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageChanged($event)"
+                      aria-label="Select page">
+        </mat-paginator>
+     
+       
+                </div>
+                <button mat-flat-button color="primary" (click)="openAddDialog()">Add New</button>
+                
+            </div>
+           </div>
+           
+       </div>
+   </div>
+
+
+
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html> 
